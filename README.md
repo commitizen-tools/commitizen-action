@@ -4,7 +4,7 @@ Commitizen github action to bump and create changelog
 
 ## Usage
 
-1. In your local repo remember to create a `.cz.toml` file (run `cz init` to create it)
+1. In your repository create a `.cz.toml` file (you can run `cz init` to create it)
 2. Create a `.github/workflows/bumpversion.yaml` with the Sample Workflow
 
 ## Sample Workflow
@@ -42,6 +42,11 @@ jobs:
 | `branch`       | Destination branch to push changes                                                                           | `master`    |
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
+
+If you use `secrets.GITHUB_TOKEN` other actions won't be triggered.
+To solve that you will need a personal access token.
+Follow the instructions of [github tutorial](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token) in order
+to create one
 
 ## Contributing
 
