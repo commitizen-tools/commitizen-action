@@ -19,9 +19,9 @@ fi
 
 echo "Runnung cz..."
 if ! $INPUT_DRY_RUN; then
-    cz bump --changelog
+    cz bump --yes --changelog
 else
-    cz bump --changelog --dry-run
+    cz bump --yes --changelog --dry-run
 fi
 
 echo "Done."
