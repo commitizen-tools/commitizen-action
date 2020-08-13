@@ -15,3 +15,14 @@ inputs:
     description: 'Create changelog when bumping the version'
     default: "true"
     required: false
+  github_token:
+    description: 'Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}'
+    required: true
+  repository:
+    description: 'Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})'
+    default: ''
+    required: false
+  branch:
+    description: 'Destination branch to push changes'
+    required: false
+    default: 'master'

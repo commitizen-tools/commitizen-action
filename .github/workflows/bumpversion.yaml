@@ -12,11 +12,9 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Create bump and changelog
       uses: Woile/commitizen-action@master
-      with:
-        dry_run: false
-    - name: Push changes back to master
-      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}

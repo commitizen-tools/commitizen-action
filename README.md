@@ -20,27 +20,28 @@ on:
 jobs:
   bump_version:
     runs-on: ubuntu-latest
-    name: 'Bump version and create changelog with commitizen'
+    name: "Bump version and create changelog with commitizen"
     steps:
-    - name: Check out
-      uses: actions/checkout@v2
-    - name: Create bump and changelog
-      uses: Woile/commitizen-action@master
-      with:
-        dry_run: false
-    - name: Push changes back to master
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Check out
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Create bump and changelog
+        uses: Woile/commitizen-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Variables
 
-| Name        | Description                                   | Default |
-| ----------- | --------------------------------------------- | ------- |
-| `dry_run`   | Run without creating commit, output to stdout | false   |
-| `changelog` | Create changelog when bumping the version     | true    |
+| Name           | Description                                                                                                  | Default     |
+| -------------- | ------------------------------------------------------------------------------------------------------------ | ----------- |
+| `github_token` | Token for the repo. Can be passed in using \$\{{ secrets.GITHUB_TOKEN }} **required**                        | -           |
+| `dry_run`      | Run without creating commit, output to stdout                                                                | false       |
+| `repository`   | Repository name to push. Default or empty value represents current github repository (\${GITHUB_REPOSITORY}) | current one |
+| `branch`       | Destination branch to push changes                                                                           | `master`    |
+
+<!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
 ## Contributing
 
