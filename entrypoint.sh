@@ -17,6 +17,10 @@ else
     pip install commitizen
 fi
 
+echo "Configuring git user and email..."
+git config --local user.email "action@github.com"
+git config --local user.name "GitHub Action"
+
 echo "Runnung cz..."
 if ! $INPUT_DRY_RUN; then
     cz bump --yes --changelog
