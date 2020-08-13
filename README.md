@@ -48,8 +48,3 @@ To solve that you will need a personal access token.
 Follow the instructions of [github tutorial](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token) in order
 to create one
 
-## Contributing
-
-Whenever we want to release a new version, we have to mark it as breaking change.
-The `.cz.toml` configuration is using `$major` to format the tag, this means that
-it's the only kind of release allowed, so, mark as breaking change.
