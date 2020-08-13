@@ -1,0 +1,17 @@
+name: 'Bump and changelog using commitizen'
+description: 'Create a commit bumping the version of your project and creating a changelog file'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'git-commit'
+  color: 'purple'
+inputs:
+  dry_run:
+    description: 'Run without creating commit, output to stdout'
+    default: "false"
+    required: false
+  changelog:
+    description: 'Create changelog when bumping the version'
+    default: "true"
+    required: false
