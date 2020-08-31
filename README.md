@@ -19,6 +19,7 @@ on:
 
 jobs:
   bump_version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
     runs-on: ubuntu-latest
     name: "Bump version and create changelog with commitizen"
     steps:
@@ -27,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Create bump and changelog
-        uses: Woile/commitizen-action@master
+        uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
