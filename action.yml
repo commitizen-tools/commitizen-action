@@ -1,4 +1,4 @@
-name: 'Bump and changelog using commitizen'
+name: 'Bump and changelog using commitizen ++'
 description: 'Create a commit bumping the version of your project and creating a changelog file'
 runs:
   using: 'docker'
