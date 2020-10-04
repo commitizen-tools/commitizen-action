@@ -1,3 +1,9 @@
+## 0.3.2 (2020-10-04)
+
+### Fix
+
+- remove default arg for fix ci
+
 ## 0.3.1 (2020-10-04)
 
 ### Fix
