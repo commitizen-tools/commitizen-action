@@ -11,6 +11,10 @@ inputs:
     description: 'Run without creating commit, output to stdout'
     default: "false"
     required: false
+  prerelease:
+    description: 'Set as prerelease version
+    default: "flase"
+    required: false
   changelog:
     description: 'Create changelog when bumping the version'
     default: "true"
