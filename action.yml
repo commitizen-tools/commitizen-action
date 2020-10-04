@@ -13,7 +13,7 @@ inputs:
     required: false
   prerelease:
     description: 'Set as prerelease version
-    default: "flase"
+    default: "false"
     required: false
   changelog:
     description: 'Create changelog when bumping the version'
