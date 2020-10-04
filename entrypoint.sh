@@ -2,7 +2,7 @@
 
 if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
-if [ $PRERELEASE ]; then PRERELEASE="--prerelease $PRERELEASE"; else PRERELEASE=''; fi
+if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
 INPUT_BRANCH=${INPUT_BRANCH:-master}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 # : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
@@ -30,8 +30,8 @@ git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
 
 
-echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $PRERELEASE"
-cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $PRERELEASE
+echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE"
+cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE
 
 
 echo "Pushing to branch..."
