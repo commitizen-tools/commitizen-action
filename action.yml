@@ -12,7 +12,7 @@ inputs:
     default: "false"
     required: false
   prerelease:
-    description: 'Set as prerelease version
+    description: 'Set as prerelease version'
     default: "false"
     required: false
   changelog:
