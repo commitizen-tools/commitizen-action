@@ -1,4 +1,4 @@
-# commitizen-action Fork
+# commitizen-action
 
 Add [commitizen][cz] incredibly fast into your project!
 
