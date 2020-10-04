@@ -1,9 +1,10 @@
-# commitizen-action
+# commitizen-action Fork
 
 Add [commitizen][cz] incredibly fast into your project!
 
 ## Features
 
+- Allow prerelease 
 - Super easy to setup
 - Automatically bump version
 - Automatically create changelog
