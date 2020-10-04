@@ -1,3 +1,9 @@
+## 0.3.3 (2020-10-04)
+
+### Fix
+
+- use right var for prerelease
+
 ## 0.3.2 (2020-10-04)
 
 ### Fix
