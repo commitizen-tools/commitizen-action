@@ -27,10 +27,11 @@ echo "Configuring git user and email..."
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
 
-echo "Runnung cz..."
 if ! $INPUT_DRY_RUN; then
+    echo "Running cz..."
     cz bump --yes --changelog
 else
+    echo "Running dry run cz..."
     cz bump --yes --changelog --dry-run
 fi
 
