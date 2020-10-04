@@ -1,3 +1,19 @@
+## 0.3.0 (2020-10-04)
+
+### Fix
+
+- change name for publish action
+- typo in action config prerelease
+- typo in prerelease argument
+
+### Refactor
+
+- bump system
+
+### Feat
+
+- add prerelease option
+
 ## 0.2.1 (2020-10-04)
 
 ### Fix
