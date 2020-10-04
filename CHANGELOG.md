@@ -1,3 +1,9 @@
+## 0.2.1 (2020-10-04)
+
+### Fix
+
+- **entrypoint**: typo correction
+
 ## 0.2.0 (2020-08-13)
 
 ### Feat
