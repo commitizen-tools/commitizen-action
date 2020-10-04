@@ -27,6 +27,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
@@ -35,17 +36,25 @@ jobs:
 
 ## Variables
 
-| Name           | Description                                                                                                  | Default     |
-| -------------- | ------------------------------------------------------------------------------------------------------------ | ----------- |
-| `github_token` | Token for the repo. Can be passed in using \$\{{ secrets.GITHUB_TOKEN }} **required**                        | -           |
-| `dry_run`      | Run without creating commit, output to stdout                                                                | false       |
-| `repository`   | Repository name to push. Default or empty value represents current github repository (\${GITHUB_REPOSITORY}) | current one |
-| `branch`       | Destination branch to push changes                                                                           | `master`    |
+| Name           | Description                                                                           | Default     |
+| -------------- | ------------------------------------------------------------------------------------- | ----------- |
+| `github_token` | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required** | -           |
+| `dry_run`      | Run without creating commit, output to stdout                                         | false       |
+| `repository`   | Repository name to push. Default or empty value represents current github repository  | current one |
+| `branch`       | Destination branch to push changes                                                    | `master`    |
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
-If you use `secrets.GITHUB_TOKEN` other actions won't be triggered.
-To solve that you will need a personal access token.
-Follow the instructions of [github tutorial](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token#creating-a-token) in order
-to create one
+## Troubleshooting
 
+### Other actions are not triggered when the tag is pushed
+
+This problem occurs because `secrets.GITHUB_TOKEN` does not trigger other
+actions [by design][by_design].
+
+To solve it you must use a personal access token in the checkout and the commitizen steps.
+
+Follow the instructions in [commitizen's documentation][cz-docs-ga]
+
+[by_design]: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#example-using-multiple-events-with-activity-types-or-configuration
+[cz-docs-ga]: https://commitizen-tools.github.io/commitizen/tutorials/github_actions/
