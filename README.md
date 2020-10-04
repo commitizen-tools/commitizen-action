@@ -1,11 +1,35 @@
 # commitizen-action
 
-Commitizen github action to bump and create changelog
+Add [commitizen][cz] incredibly fast into your project!
+
+## Features
+
+- Super easy to setup
+- Automatically bump version
+- Automatically create changelog
+- Update any file in your repo with the new version
+
+Are you using [conventional commits][cc] and [semver][semver]?
+
+Then you are ready to use this github action, the only thing you'll need is the
+`.cz.toml` file in your project.
 
 ## Usage
 
 1. In your repository create a `.cz.toml` file (you can run `cz init` to create it)
 2. Create a `.github/workflows/bumpversion.yaml` with the Sample Workflow
+
+### Minimal configuration
+
+Your `.cz.toml` (or `pyproject.toml` if you are using python) should look like
+this.
+
+```toml
+[tool.commitizen]
+version = "0.1.0"  # This should be your current semver version
+```
+
+For more information visit [commitizen's configuration page][cz-conf]
 
 ## Sample Workflow
 
@@ -56,5 +80,17 @@ To solve it you must use a personal access token in the checkout and the commiti
 
 Follow the instructions in [commitizen's documentation][cz-docs-ga]
 
+## I'm not using conventional commits, I'm using my own set of rules on commits
+
+If your rules can be parsed then you can build your own commitizen rules, you can
+create a new commitizen python package or you can describe it on the `toml` conf itself.
+
+[Read more about customization][cz-custom]
+
 [by_design]: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#example-using-multiple-events-with-activity-types-or-configuration
 [cz-docs-ga]: https://commitizen-tools.github.io/commitizen/tutorials/github_actions/
+[cz]: https://commitizen-tools.github.io/commitizen/
+[cc]: https://www.conventionalcommits.org/
+[semver]: https://semver.org/
+[cz-conf]: https://commitizen-tools.github.io/commitizen/config/
+[cz-custom]: https://commitizen-tools.github.io/commitizen/customization/
