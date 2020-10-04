@@ -1,3 +1,9 @@
+## 0.3.1 (2020-10-04)
+
+### Fix
+
+- doc add in readme prerelease line
+
 ## 0.3.0 (2020-10-04)
 
 ### Fix
