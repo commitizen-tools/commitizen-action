@@ -4,6 +4,7 @@ Add [commitizen][cz] incredibly fast into your project!
 
 ## Features
 
+- Allow prerelease 
 - Super easy to setup
 - Automatically bump version
 - Automatically create changelog
@@ -66,6 +67,7 @@ jobs:
 | `dry_run`      | Run without creating commit, output to stdout                                         | false       |
 | `repository`   | Repository name to push. Default or empty value represents current github repository  | current one |
 | `branch`       | Destination branch to push changes                                                    | `master`    |
+| `prerelease`   | Set as prerelease {alpha,beta,rc} choose type of prerelease                           | -           |
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
