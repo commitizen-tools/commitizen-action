@@ -1,37 +1,3 @@
-## 0.3.3 (2020-10-04)
-
-### Fix
-
-- use right var for prerelease
-
-## 0.3.2 (2020-10-04)
-
-### Fix
-
-- remove default arg for fix ci
-
-## 0.3.1 (2020-10-04)
-
-### Fix
-
-- doc add in readme prerelease line
-
-## 0.3.0 (2020-10-04)
-
-### Fix
-
-- change name for publish action
-- typo in action config prerelease
-- typo in prerelease argument
-
-### Refactor
-
-- bump system
-
-### Feat
-
-- add prerelease option
-
 ## 0.2.1 (2020-10-04)
 
 ### Fix
