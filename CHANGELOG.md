@@ -1,3 +1,9 @@
+## 0.4.0 (2020-11-24)
+
+### Feat
+
+- add echo Commitizen version to better debug (#4)
+
 ## 0.3.0 (2020-10-05)
 
 ### Feat
