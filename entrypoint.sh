@@ -23,6 +23,8 @@ if [[ -f "requirements.txt" ]]; then
     pip install -r requirements.txt commitizen
 else
     pip install commitizen
+    echo "Commitizen version:"
+    cz version
 fi
 
 echo "Configuring git user and email..."
