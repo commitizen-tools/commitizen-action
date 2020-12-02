@@ -1,3 +1,9 @@
+## 0.5.0 (2020-12-02)
+
+### Feat
+
+- add extra_requirements parameters instead of reading the requirements.txt file
+
 ## 0.4.0 (2020-11-24)
 
 ### Feat
