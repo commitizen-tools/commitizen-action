@@ -4,6 +4,7 @@ if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
 if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
 INPUT_BRANCH=${INPUT_BRANCH:-master}
+INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 # : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
 
@@ -18,14 +19,10 @@ echo "Repository: $REPOSITORY"
 echo "Actor: $GITHUB_ACTOR"
 
 echo "Installing requirements..."
-if [[ -f "requirements.txt" ]]; then
-    # Ensure commitizen + reqs may have custom commitizen plugins
-    pip install -r requirements.txt commitizen
-else
-    pip install commitizen
-    echo "Commitizen version:"
-    cz version
-fi
+pip install commitizen $INPUT_EXTRA_REQUIREMENTS
+echo "Commitizen version:"
+cz version
+
 
 echo "Configuring git user and email..."
 git config --local user.email "action@github.com"

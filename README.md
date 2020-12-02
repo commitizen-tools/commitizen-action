@@ -4,7 +4,7 @@ Add [commitizen][cz] incredibly fast into your project!
 
 ## Features
 
-- Allow prerelease 
+- Allow prerelease
 - Super easy to setup
 - Automatically bump version
 - Automatically create changelog
@@ -61,13 +61,14 @@ jobs:
 
 ## Variables
 
-| Name           | Description                                                                           | Default     |
-| -------------- | ------------------------------------------------------------------------------------- | ----------- |
-| `github_token` | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required** | -           |
-| `dry_run`      | Run without creating commit, output to stdout                                         | false       |
-| `repository`   | Repository name to push. Default or empty value represents current github repository  | current one |
-| `branch`       | Destination branch to push changes                                                    | `master`    |
-| `prerelease`   | Set as prerelease {alpha,beta,rc} choose type of prerelease                           | -           |
+| Name                 | Description                                                                                                                                                | Default     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `github_token`       | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required**                                                                      | -           |
+| `dry_run`            | Run without creating commit, output to stdout                                                                                                              | false       |
+| `repository`         | Repository name to push. Default or empty value represents current github repository                                                                       | current one |
+| `branch`             | Destination branch to push changes                                                                                                                         | `master`    |
+| `prerelease`         | Set as prerelease {alpha,beta,rc} choose type of prerelease                                                                                                | -           |
+| `extra_requirements` | Custom requirements, if your project uses a custom rule or plugins, you can specify them separated by a space. E.g: `'commitizen-emoji conventional-JIRA'` | -           |
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
