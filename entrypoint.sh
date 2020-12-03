@@ -3,10 +3,10 @@
 if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
 if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
+INPUT_FORCE_CHANGELOG=${INPUT_FORCE_CHANGELOG:false}
 INPUT_BRANCH=${INPUT_BRANCH:-master}
 INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
-# : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
 
 set -e
 
@@ -27,6 +27,11 @@ cz version
 echo "Configuring git user and email..."
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
+
+[ $INPUT_FORCE_CHANGELOG ] && {
+    echo "Remove old changelog"
+    rm CHANGELOG.md
+};
 
 
 echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE"
