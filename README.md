@@ -69,6 +69,8 @@ jobs:
 | `branch`             | Destination branch to push changes                                                                                                                         | `master`    |
 | `prerelease`         | Set as prerelease {alpha,beta,rc} choose type of prerelease                                                                                                | -           |
 | `extra_requirements` | Custom requirements, if your project uses a custom rule or plugins, you can specify them separated by a space. E.g: `'commitizen-emoji conventional-JIRA'` | -           |
+| `force_changelog`         | Overwrite changelog file, usefull when using multible tag branch (main, dev)                                                                                                | -           |
+
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
