@@ -17,6 +17,10 @@ inputs:
     description: 'Create changelog when bumping the version'
     default: "true"
     required: false
+  force_changelog:
+    description: 'Overwrite changelog when bumping the version'
+    default: "false"
+    required: false
   github_token:
     description: 'Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}'
     required: true
