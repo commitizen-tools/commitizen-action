@@ -1,3 +1,9 @@
+## 0.6.0 (2021-02-06)
+
+### Feat
+
+- add pull before pushing to avoid error with remote with new changes
+
 ## 0.5.0 (2020-12-02)
 
 ### Feat
