@@ -35,6 +35,7 @@ cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE
 
 echo "Pushing to branch..."
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+git pull ${remote_repo} ${INPUT_BRANCH}
 git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags --tags;
 
 echo "Done."
