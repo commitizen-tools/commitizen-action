@@ -1,3 +1,13 @@
+## 0.7.0 (2021-03-08)
+
+### Feat
+
+- add support for `--changelog-to-stdout`
+
+### Fix
+
+- use commitizen-tool action instead of Woile's
+
 ## 0.6.0 (2021-02-06)
 
 ### Feat
