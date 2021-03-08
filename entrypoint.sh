@@ -30,8 +30,16 @@ git config --local user.name "GitHub Action"
 
 
 echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE"
-cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE
 
+if [ $INPUT_CHANGELOG_INCREMENT_FILENAME ];
+then
+    cz bump --yes --changelog-to-stdout $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE > $INPUT_CHANGELOG_INCREMENT_FILENAME;
+else
+    cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE;
+fi
+
+export REV=`cz version --project`
+echo "REVISION=$REV" >> $GITHUB_ENV
 
 echo "Pushing to branch..."
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
