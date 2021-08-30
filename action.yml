@@ -42,4 +42,4 @@ inputs:
   git_email:
     description: 'Email address used to configure git (for git operations)'
     required: false
-    default: '41898282+github-actions[bot]@users.noreply.github.com'
+    default: 'github-actions[bot]@users.noreply.github.com'
