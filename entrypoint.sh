@@ -25,8 +25,10 @@ cz version
 
 
 echo "Configuring git user and email..."
-git config --local user.email "action@github.com"
-git config --local user.name "GitHub Action"
+git config --local user.name "$INPUT_GIT_NAME"
+git config --local user.email "$INPUT_GIT_EMAIL"
+echo "Git name: $(git config --get user.name)"
+echo "Git email: $(git config --get user.email)"
 
 
 echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE"

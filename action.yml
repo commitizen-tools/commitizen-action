@@ -35,3 +35,11 @@ inputs:
   changelog_increment_filename:
     description: 'Filename to store the incremented generated changelog. This is different to changelog as it only contains the changes for the just generated version'
     required: false
+  git_name:
+    description: 'Name used to configure git (for git operations)'
+    required: false
+    default: 'github-actions[bot]'
+  git_email:
+    description: 'Email address used to configure git (for git operations)'
+    required: false
+    default: '41898282+github-actions[bot]@users.noreply.github.com'
