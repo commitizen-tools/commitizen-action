@@ -1,3 +1,13 @@
+## 0.8.0 (2021-08-30)
+
+### Fix
+
+- removed id from default git_email
+
+### Feat
+
+- support  custom git config
+
 ## 0.7.0 (2021-03-08)
 
 ### Feat
