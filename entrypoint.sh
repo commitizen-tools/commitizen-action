@@ -43,6 +43,8 @@ fi
 export REV=`cz version --project`
 echo "REVISION=$REV" >> $GITHUB_ENV
 
+echo "::set-output name=version::$REV"
+
 echo "Pushing to branch..."
 remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
 git pull ${remote_repo} ${INPUT_BRANCH}
