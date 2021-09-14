@@ -6,6 +6,9 @@ runs:
 branding:
   icon: 'git-commit'
   color: 'purple'
+outputs:
+  version:
+    description: 'New version'
 inputs:
   dry_run:
     description: 'Run without creating commit, output to stdout'

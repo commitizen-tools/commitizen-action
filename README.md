@@ -53,10 +53,13 @@ jobs:
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
-      - name: Create bump and changelog
+      - id: cz
+        name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print Version
+        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
 ```
 
 ## Variables
@@ -74,6 +77,14 @@ jobs:
 | `git_email`                    | Email address used to configure git (for git operations)                                                                                                                 | `github-actions[bot]@users.noreply.github.com` |
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
+
+## Outputs
+
+| Name      | Description          |
+| --------- | -------------------- |
+| `version` | The new version      |
+
+Additionally, the new version is also availble as an environment variable under `REVISION`.
 
 ## Troubleshooting
 
