@@ -75,6 +75,14 @@ jobs:
 
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
+## Outputs
+
+| Name      | Description          |
+| --------- | -------------------- |
+| `version` | The new version      |
+
+Additionally, the new version is also availble as an environment variable under `REVISION`.
+
 ## Troubleshooting
 
 ### Other actions are not triggered when the tag is pushed
