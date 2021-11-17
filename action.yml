@@ -13,6 +13,14 @@ inputs:
   dry_run:
     description: 'Run without creating commit, output to stdout'
     required: false
+  commit:
+    description: 'If true a commit is created containing the bump changes'
+    required: false
+    default: "true"
+  push:
+    description: 'If true the bump commit is pushed to the remote repository'
+    required: false
+    default: "true"
   prerelease:
     description: 'Set as prerelease version'
     required: false

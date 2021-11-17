@@ -3,6 +3,7 @@
 if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
 if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
+if [ "$INPUT_COMMIT" == 'false' ]; then INPUT_COMMIT='--files-only'; else INPUT_COMMIT=''; fi
 INPUT_BRANCH=${INPUT_BRANCH:-master}
 INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
@@ -31,13 +32,13 @@ echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
 
-echo "Running cz: $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE"
+echo "Running cz: $INPUT_DRY_RUN $INPUT_COMMIT $INPUT_CHANGELOG $INPUT_PRERELEASE"
 
 if [ $INPUT_CHANGELOG_INCREMENT_FILENAME ];
 then
-    cz bump --yes --changelog-to-stdout $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE > $INPUT_CHANGELOG_INCREMENT_FILENAME;
+    cz bump --yes --changelog-to-stdout $INPUT_COMMIT $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE > $INPUT_CHANGELOG_INCREMENT_FILENAME;
 else
-    cz bump --yes $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE;
+    cz bump --yes $INPUT_DRY_RUN $INPUT_COMMIT $INPUT_CHANGELOG $INPUT_PRERELEASE;
 fi
 
 export REV=`cz version --project`
@@ -45,9 +46,13 @@ echo "REVISION=$REV" >> $GITHUB_ENV
 
 echo "::set-output name=version::$REV"
 
-echo "Pushing to branch..."
-remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
-git pull ${remote_repo} ${INPUT_BRANCH}
-git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags --tags;
-
+if [ "$INPUT_PUSH" == "true" ];
+then
+  echo "Pushing to branch..."
+  remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
+  git pull ${remote_repo} ${INPUT_BRANCH}
+  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags --tags;
+else
+  echo "Not pushing"
+fi
 echo "Done."
