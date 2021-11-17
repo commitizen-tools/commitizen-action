@@ -1,3 +1,9 @@
+## 0.10.0 (2021-11-17)
+
+### Feat
+
+- add `commit` and `push` inputs
+
 ## 0.9.0 (2021-09-14)
 
 ### Feat
