@@ -75,7 +75,8 @@ jobs:
 | `changelog_increment_filename` | Filename to store the incremented generated changelog. This is different to changelog as it only contains the changes for the just generated version. Example: `body.md` | -                                              |
 | `git_name`                     | Name used to configure git (for git operations)                                                                                                                          | `github-actions[bot]`                          |
 | `git_email`                    | Email address used to configure git (for git operations)                                                                                                                 | `github-actions[bot]@users.noreply.github.com` |
-
+| `push`                         | Define if the changes should be pushed to the branch.                                                                                                                    | true                                           |
+| `commit`                       | Define if the changes should be committed to the branch.                                                                                                                 | true                                           |
 <!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
 
 ## Outputs
