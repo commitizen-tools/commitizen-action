@@ -64,26 +64,26 @@ jobs:
 
 ## Variables
 
-| Name                           | Description                                                                                                                                                              | Default                                        |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required**                                                                                    | -                                              |
-| `dry_run`                      | Run without creating commit, output to stdout                                                                                                                            | false                                          |
-| `repository`                   | Repository name to push. Default or empty value represents current github repository                                                                                     | current one                                    |
-| `branch`                       | Destination branch to push changes                                                                                                                                       | `master`                                       |
-| `prerelease`                   | Set as prerelease {alpha,beta,rc} choose type of prerelease                                                                                                              | -                                              |
-| `extra_requirements`           | Custom requirements, if your project uses a custom rule or plugins, you can specify them separated by a space. E.g: `'commitizen-emoji conventional-JIRA'`               | -                                              |
-| `changelog_increment_filename` | Filename to store the incremented generated changelog. This is different to changelog as it only contains the changes for the just generated version. Example: `body.md` | -                                              |
-| `git_name`                     | Name used to configure git (for git operations)                                                                                                                          | `github-actions[bot]`                          |
-| `git_email`                    | Email address used to configure git (for git operations)                                                                                                                 | `github-actions[bot]@users.noreply.github.com` |
-| `push`                         | Define if the changes should be pushed to the branch.                                                                                                                    | true                                           |
-| `commit`                       | Define if the changes should be committed to the branch.                                                                                                                 | true                                           |
-<!--           | `changelog`                                                                                                  | Create changelog when bumping the version | true | -->
+| Name                           | Description                                                                                                                                                              | Default                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required**                                                                                    | -                                               |
+| `dry_run`                      | Run without creating commit, output to stdout                                                                                                                            | false                                           |
+| `repository`                   | Repository name to push. Default or empty value represents current github repository                                                                                     | current one                                     |
+| `branch`                       | Destination branch to push changes                                                                                                                                       | Same as the one executing the action by default |
+| `prerelease`                   | Set as prerelease {alpha,beta,rc} choose type of prerelease                                                                                                              | -                                               |
+| `extra_requirements`           | Custom requirements, if your project uses a custom rule or plugins, you can specify them separated by a space. E.g: `'commitizen-emoji conventional-JIRA'`               | -                                               |
+| `changelog_increment_filename` | Filename to store the incremented generated changelog. This is different to changelog as it only contains the changes for the just generated version. Example: `body.md` | -                                               |
+| `git_name`                     | Name used to configure git (for git operations)                                                                                                                          | `github-actions[bot]`                           |
+| `git_email`                    | Email address used to configure git (for git operations)                                                                                                                 | `github-actions[bot]@users.noreply.github.com`  |
+| `push`                         | Define if the changes should be pushed to the branch.                                                                                                                    | true                                            |
+| `commit`                       | Define if the changes should be committed to the branch.                                                                                                                 | true                                            |
+| <!--                           | `changelog`                                                                                                                                                              | Create changelog when bumping the version       | true | --> |
 
 ## Outputs
 
-| Name      | Description          |
-| --------- | -------------------- |
-| `version` | The new version      |
+| Name      | Description     |
+| --------- | --------------- |
+| `version` | The new version |
 
 Additionally, the new version is also availble as an environment variable under `REVISION`.
 
