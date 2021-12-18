@@ -1,3 +1,10 @@
+## 0.11.0 (2021-12-18)
+
+### Feat
+
+- detect default branch
+- detect default branch
+
 ## 0.10.0 (2021-11-17)
 
 ### Feat
