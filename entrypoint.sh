@@ -4,7 +4,8 @@ if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
 if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
 if [ "$INPUT_COMMIT" == 'false' ]; then INPUT_COMMIT='--files-only'; else INPUT_COMMIT=''; fi
-INPUT_BRANCH=${INPUT_BRANCH:-master}
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+INPUT_BRANCH=${INPUT_BRANCH:-$CURRENT_BRANCH}
 INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
 # : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
