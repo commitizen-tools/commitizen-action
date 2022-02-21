@@ -54,3 +54,7 @@ inputs:
     description: 'Email address used to configure git (for git operations)'
     required: false
     default: 'github-actions[bot]@users.noreply.github.com'
+  commitizen_version:
+    description: 'Specify the version to be used by commitizen'
+    required: false
+    default: latest

@@ -77,7 +77,8 @@ jobs:
 | `git_email`                    | Email address used to configure git (for git operations)                                                                                                                 | `github-actions[bot]@users.noreply.github.com`  |
 | `push`                         | Define if the changes should be pushed to the branch.                                                                                                                    | true                                            |
 | `commit`                       | Define if the changes should be committed to the branch.                                                                                                                 | true                                            |
-| <!--                           | `changelog`                                                                                                                                                              | Create changelog when bumping the version       | true | --> |
+| `commitizen_version`           | Specify the version to be used by commitizen. Eg: `2.21.0`                                                                                                               | latest                                          |
+| `changelog`                    | Create changelog when bumping the version                                                                                                                                | true                                            |
 
 ## Outputs
 
