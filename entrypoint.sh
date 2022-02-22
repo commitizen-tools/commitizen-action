@@ -4,7 +4,7 @@ if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
 if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
 if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
 if [ "$INPUT_COMMIT" == 'false' ]; then INPUT_COMMIT='--files-only'; else INPUT_COMMIT=''; fi
-if [ "$INPUT_COMMITIZEN_VERSION" == 'latest' ]; then COMMITIZEN_VERSION="commitizen"; else COMMITIZEN_VERSION="commitizen==$INPUT_COMMITIZEN_VERSION"; fi
+if [ "$INPUT_COMMITIZEN_VERSION" == 'latest' ]; then INPUT_COMMITIZEN_VERSION="commitizen"; else INPUT_COMMITIZEN_VERSION="commitizen==$INPUT_COMMITIZEN_VERSION"; fi
 
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -24,7 +24,7 @@ echo "Repository: $REPOSITORY"
 echo "Actor: $GITHUB_ACTOR"
 
 echo "Installing requirements..."
-pip install "$COMMITIZEN_VERSION" "$INPUT_EXTRA_REQUIREMENTS"
+pip install "$INPUT_COMMITIZEN_VERSION" "$INPUT_EXTRA_REQUIREMENTS"
 echo "Commitizen version:"
 cz version
 
