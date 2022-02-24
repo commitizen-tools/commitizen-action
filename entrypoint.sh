@@ -24,7 +24,7 @@ echo "Repository: $REPOSITORY"
 echo "Actor: $GITHUB_ACTOR"
 
 echo "Installing requirements..."
-pip install "$INPUT_COMMITIZEN_VERSION" "$INPUT_EXTRA_REQUIREMENTS"
+pip install "$INPUT_COMMITIZEN_VERSION" $INPUT_EXTRA_REQUIREMENTS
 echo "Commitizen version:"
 cz version
 
