@@ -1,3 +1,14 @@
+## 0.12.0 (2022-02-24)
+
+### Feat
+
+- add commitizen version input
+- add commitizen version input
+
+### Refactor
+
+- rename cz version variable
+
 ## 0.11.0 (2021-12-18)
 
 ### Feat
