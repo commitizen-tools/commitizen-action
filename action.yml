@@ -57,4 +57,8 @@ inputs:
   commitizen_version:
     description: 'Specify the version to be used by commitizen'
     required: false
-    default: 'latest'
+    default: latest
+  no_raise:
+    description: "Don't raise the given comma-delimited exit codes"
+    required: false
+    default: '21'
