@@ -1,3 +1,10 @@
+## 0.13.0 (2022-05-04)
+
+### Feat
+
+- add no-raise option
+- add no-raise option
+
 ## 0.12.0 (2022-02-24)
 
 ### Feat
