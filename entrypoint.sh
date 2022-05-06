@@ -53,7 +53,7 @@ if [ "$INPUT_PUSH" == "true" ]; then
   echo "Pushing to branch..."
   remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
   git pull ${remote_repo} ${INPUT_BRANCH}
-  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags --tags
+  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --tags
 else
   echo "Not pushing"
 fi
