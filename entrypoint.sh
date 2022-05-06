@@ -11,7 +11,7 @@ CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 INPUT_BRANCH=${INPUT_BRANCH:-$CURRENT_BRANCH}
 INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
-# : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
+# : "${INPUT_CHANGELOG:=true}" ignored for now, let's check that it works
 
 set -e
 
