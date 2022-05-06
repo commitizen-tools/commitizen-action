@@ -28,9 +28,10 @@ pip install "$INPUT_COMMITIZEN_VERSION" $INPUT_EXTRA_REQUIREMENTS
 echo "Commitizen version:"
 cz version
 
-echo "Configuring git user and email..."
+echo "Configuring Git username, email, and pull behavior..."
 git config --local user.name "$INPUT_GIT_NAME"
 git config --local user.email "$INPUT_GIT_EMAIL"
+git config --local pull.rebase true
 echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
