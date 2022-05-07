@@ -1,60 +1,70 @@
 #!/bin/bash
 
-if [ $INPUT_DRY_RUN ]; then INPUT_DRY_RUN='--dry-run'; else INPUT_DRY_RUN=''; fi
-if [ $INPUT_CHANGELOG ]; then INPUT_CHANGELOG='--changelog'; else INPUT_CHANGELOG=''; fi
-if [ $INPUT_PRERELEASE ]; then INPUT_PRERELEASE="--prerelease $INPUT_PRERELEASE"; else INPUT_PRERELEASE=''; fi
-if [ "$INPUT_COMMIT" == 'false' ]; then INPUT_COMMIT='--files-only'; else INPUT_COMMIT=''; fi
-if [ "$INPUT_COMMITIZEN_VERSION" == 'latest' ]; then INPUT_COMMITIZEN_VERSION="commitizen"; else INPUT_COMMITIZEN_VERSION="commitizen==$INPUT_COMMITIZEN_VERSION"; fi
-if [ -n "$INPUT_NO_RAISE" ]; then INPUT_NO_RAISE="--no-raise $INPUT_NO_RAISE"; else INPUT_NO_RAISE=''; fi
-
-CURRENT_BRANCH="$(git branch --show-current)"
-INPUT_BRANCH=${INPUT_BRANCH:-$CURRENT_BRANCH}
-INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
-REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
-# : "${INPUT_CHANGELOG:=true}" ignored for now, let's check that it works
-
 set -e
 
-[ -z "${INPUT_GITHUB_TOKEN}" ] && {
+if [[ -z $INPUT_GITHUB_TOKEN ]]; then
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".'
   exit 1
-}
-
-echo "Repository: $REPOSITORY"
-echo "Actor: $GITHUB_ACTOR"
-
-echo "Installing requirements..."
-pip install "$INPUT_COMMITIZEN_VERSION" $INPUT_EXTRA_REQUIREMENTS
-echo "Commitizen version:"
-cz version
+fi
 
 echo "Configuring Git username, email, and pull behavior..."
-git config --local user.name "$INPUT_GIT_NAME"
-git config --local user.email "$INPUT_GIT_EMAIL"
+git config --local user.name "${INPUT_GIT_NAME}"
+git config --local user.email "${INPUT_GIT_EMAIL}"
 git config --local pull.rebase true
 echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
-echo "Running cz: $INPUT_DRY_RUN $INPUT_COMMIT $INPUT_CHANGELOG $INPUT_PRERELEASE"
-
-if [ $INPUT_CHANGELOG_INCREMENT_FILENAME ]; then
-  cz $INPUT_NO_RAISE bump --yes --changelog-to-stdout $INPUT_COMMIT $INPUT_DRY_RUN $INPUT_CHANGELOG $INPUT_PRERELEASE >$INPUT_CHANGELOG_INCREMENT_FILENAME
+PIP_CMD=('pip' 'install')
+if [[ $INPUT_COMMITIZEN_VERSION == 'latest' ]]; then
+  PIP_CMD+=('commitizen')
 else
-  cz $INPUT_NO_RAISE bump --yes $INPUT_DRY_RUN $INPUT_COMMIT $INPUT_CHANGELOG $INPUT_PRERELEASE
+  PIP_CMD+=("commitizen==${INPUT_COMMITIZEN_VERSION}")
 fi
+IFS=" " read -r -a INPUT_EXTRA_REQUIREMENTS <<<"$INPUT_EXTRA_REQUIREMENTS"
+PIP_CMD+=("${INPUT_EXTRA_REQUIREMENTS[@]}")
+echo "${PIP_CMD[@]}"
+"${PIP_CMD[@]}"
+echo "Commitizen version: $(cz version)"
 
-REV=$(cz version --project)
-export REV
+CZ_CMD=('cz')
+if [[ $INPUT_NO_RAISE ]]; then
+  CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
+fi
+CZ_CMD+=('bump' '--yes')
+if [[ $INPUT_DRY_RUN == 'true' ]]; then
+  CZ_CMD+=('--dry-run')
+fi
+if [[ $INPUT_CHANGELOG == 'true' ]]; then
+  CZ_CMD+=('--changelog')
+fi
+if [[ $INPUT_PRERELEASE ]]; then
+  CZ_CMD+=('--prerelease' "$INPUT_PRERELEASE")
+fi
+if [[ $INPUT_COMMIT == 'false' ]]; then
+  CZ_CMD+=('--files-only')
+fi
+if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
+  CZ_CMD+=('--changelog-to-stdout' ">$INPUT_CHANGELOG_INCREMENT_FILENAME")
+fi
+echo "${CZ_CMD[@]}"
+"${CZ_CMD[@]}"
 
-echo "REVISION=$REV" >>$GITHUB_ENV
+REV="$(cz version --project)"
+echo "REVISION=${REV}" >>"$GITHUB_ENV"
+echo "::set-output name=version::${REV}"
 
-echo "::set-output name=version::$REV"
+CURRENT_BRANCH="$(git branch --show-current)"
+INPUT_BRANCH="${INPUT_BRANCH:-$CURRENT_BRANCH}"
+INPUT_REPOSITORY="${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}"
 
-if [ "$INPUT_PUSH" == "true" ]; then
+echo "Repository: ${INPUT_REPOSITORY}"
+echo "Actor: ${GITHUB_ACTOR}"
+
+if [[ $INPUT_PUSH == 'true' ]]; then
   echo "Pushing to branch..."
-  remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
-  git pull ${remote_repo} ${INPUT_BRANCH}
-  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --tags
+  REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${INPUT_REPOSITORY}.git"
+  git pull "$REMOTE_REPO" "$INPUT_BRANCH"
+  git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}" --tags
 else
   echo "Not pushing"
 fi
