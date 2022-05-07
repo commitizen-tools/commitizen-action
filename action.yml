@@ -38,7 +38,7 @@ inputs:
   branch:
     description: 'Destination branch to push changes'
     required: false
-    default: 'master'
+    default: ''
   extra_requirements:
     description: 'Extra commitizen dependencies like your custom plugins or rules'
     required: false
