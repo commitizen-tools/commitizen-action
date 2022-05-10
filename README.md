@@ -12,7 +12,7 @@ Add [commitizen][cz] incredibly fast into your project!
 
 Are you using [conventional commits][cc] and [semver][semver]?
 
-Then you are ready to use this github action, the only thing you'll need is the
+Then you are ready to use this github action! The only thing you'll need is the
 `.cz.toml` file in your project.
 
 ## Usage
@@ -87,23 +87,23 @@ jobs:
 | --------- | --------------- |
 | `version` | The new version |
 
-Additionally, the new version is also availble as an environment variable under `REVISION`.
+Additionally, the new version is also available as an environment variable under `REVISION`.
 
 ## Troubleshooting
 
 ### Other actions are not triggered when the tag is pushed
 
-This problem occurs because `secrets.GITHUB_TOKEN` does not trigger other
+This problem occurs because `secrets.GITHUB_TOKEN` do not trigger other
 actions [by design][by_design].
 
-To solve it you must use a personal access token in the checkout and the commitizen steps.
+To solve it, you must use a personal access token in the checkout and the commitizen steps.
 
 Follow the instructions in [commitizen's documentation][cz-docs-ga]
 
 ## I'm not using conventional commits, I'm using my own set of rules on commits
 
-If your rules can be parsed then you can build your own commitizen rules, you can
-create a new commitizen python package or you can describe it on the `toml` conf itself.
+If your rules can be parsed, then you can build your own commitizen rules,
+create a new commitizen python package, or you can describe it on the `toml` config itself.
 
 [Read more about customization][cz-custom]
 
