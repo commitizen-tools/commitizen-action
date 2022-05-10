@@ -7,11 +7,11 @@ if [ "$INPUT_COMMIT" == 'false' ]; then INPUT_COMMIT='--files-only'; else INPUT_
 if [ "$INPUT_COMMITIZEN_VERSION" == 'latest' ]; then INPUT_COMMITIZEN_VERSION="commitizen"; else INPUT_COMMITIZEN_VERSION="commitizen==$INPUT_COMMITIZEN_VERSION"; fi
 if [ -n "$INPUT_NO_RAISE" ]; then INPUT_NO_RAISE="--no-raise $INPUT_NO_RAISE"; else INPUT_NO_RAISE=''; fi
 
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_BRANCH="$(git branch --show-current)"
 INPUT_BRANCH=${INPUT_BRANCH:-$CURRENT_BRANCH}
 INPUT_EXTRA_REQUIREMENTS=${INPUT_EXTRA_REQUIREMENTS:-''}
 REPOSITORY=${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}
-# : "${INPUT_CHANGELOG:=true}" ignroed for now, let's check that it works
+# : "${INPUT_CHANGELOG:=true}" ignored for now, let's check that it works
 
 set -e
 
@@ -28,9 +28,10 @@ pip install "$INPUT_COMMITIZEN_VERSION" $INPUT_EXTRA_REQUIREMENTS
 echo "Commitizen version:"
 cz version
 
-echo "Configuring git user and email..."
+echo "Configuring Git username, email, and pull behavior..."
 git config --local user.name "$INPUT_GIT_NAME"
 git config --local user.email "$INPUT_GIT_EMAIL"
+git config --local pull.rebase true
 echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
@@ -53,7 +54,7 @@ if [ "$INPUT_PUSH" == "true" ]; then
   echo "Pushing to branch..."
   remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITORY}.git"
   git pull ${remote_repo} ${INPUT_BRANCH}
-  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --follow-tags --tags
+  git push "${remote_repo}" HEAD:${INPUT_BRANCH} --tags
 else
   echo "Not pushing"
 fi
