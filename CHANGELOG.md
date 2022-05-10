@@ -1,3 +1,9 @@
+## 0.13.1 (2022-05-10)
+
+### Fix
+
+- Correct default branch from master to current
+
 ## 0.13.0 (2022-05-04)
 
 ### Feat
