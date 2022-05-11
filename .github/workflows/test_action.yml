@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{github.event.pull_request.head.ref}} 
+          ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           fetch-depth: 0  # ensures that tags are fetched, seems to be needed
       - name: Capture commit id
@@ -34,7 +34,7 @@ jobs:
           push: false
       - uses: actions/checkout@v2
         with:
-          ref: ${{github.event.pull_request.head.ref}} 
+          ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           fetch-depth: 0  # ensures that tags are fetched, seems to be needed
           path: new_head
