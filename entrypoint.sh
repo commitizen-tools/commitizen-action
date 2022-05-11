@@ -26,6 +26,8 @@ echo "${PIP_CMD[@]}"
 "${PIP_CMD[@]}"
 echo "Commitizen version: $(cz version)"
 
+PREV_REV="$(cz version --project)"
+
 CZ_CMD=('cz')
 if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
@@ -56,6 +58,9 @@ else
 fi
 
 REV="$(cz version --project)"
+if [[ $REV == "$PREV_REV" ]]; then
+  INPUT_PUSH='false'
+fi
 echo "REVISION=${REV}" >>"$GITHUB_ENV"
 echo "::set-output name=version::${REV}"
 
