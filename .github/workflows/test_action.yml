@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
+          ref: "${{ github.event.pull_request.head.ref }}"
+          repository: "${{ github.event.pull_request.head.repo.full_name }}"
           fetch-depth: 0  # ensures that tags are fetched, seems to be needed
       - name: Capture commit id
         id: capture
         run: |
-          COMMIT_ID=$(git rev-parse ${{ github.head_ref }})
+          COMMIT_ID="$(git rev-parse "${{ github.head_ref }}")"
           echo "The sha of the starting commit is $COMMIT_ID"
           echo "::set-output name=commit::$COMMIT_ID"
       - name: create test commit
@@ -29,27 +29,27 @@ jobs:
       - name: test action
         uses: ./
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
           commit: false
           push: false
       - uses: actions/checkout@v2
         with:
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
+          ref: "${{ github.event.pull_request.head.ref }}"
+          repository: "${{ github.event.pull_request.head.repo.full_name }}"
           fetch-depth: 0  # ensures that tags are fetched, seems to be needed
           path: new_head
       - name: Test push
         run: |
           cd new_head
-          last_pushed_commit=$(git rev-parse ${{ github.head_ref }})
+          last_pushed_commit="$(git rev-parse "${{ github.head_ref }}")"
           echo "Commit sha on origin: $last_pushed_commit"
-          if [[ $last_pushed_commit != ${{steps.capture.outputs.commit}} ]]; then
+          if [[ $last_pushed_commit != ${{ steps.capture.outputs.commit }} ]]; then
             echo "Something got pushed to ${{ github.head_ref }}"
             exit 1
           fi
       - name: Test commit
         run: |
-          commit_message=$(git log -1 HEAD --pretty=format:%s)
+          commit_message="$(git log -1 HEAD --pretty=format:%s)"
           echo "Latest commit: $commit_message"
           if [[ $commit_message != "feat: test feature" ]]; then
             echo "The latest commit message is not 'feat: test feature'"
