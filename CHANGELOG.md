@@ -1,3 +1,18 @@
+## 0.13.2 (2022-05-11)
+
+### Fix
+
+- Don't quote the > operator in entrypoint.sh
+- Don't quote the > operator in entrypoint.sh
+- Follow Bash best practices in entrypoint
+- Configure git pull to rebase instead of merge
+- Configure git pull to rebase instead of merge
+
+### Refactor
+
+- Remove unnecessary --follow-tags
+- Get current Git branch more simply
+
 ## 0.13.1 (2022-05-10)
 
 ### Fix
