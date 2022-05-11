@@ -42,7 +42,7 @@ jobs:
         run: |
           cd new_head
           last_pushed_commit=$(git rev-parse ${{ github.head_ref }})
-          echo "Commit sha on origin : $last_pushed_commit"
+          echo "Commit sha on origin: $last_pushed_commit"
           if [[ $last_pushed_commit != ${{steps.capture.outputs.commit}} ]]; then
             echo "Something got pushed to ${{ github.head_ref }}"
             exit 1
