@@ -44,10 +44,13 @@ if [[ $INPUT_COMMIT == 'false' ]]; then
   CZ_CMD+=('--files-only')
 fi
 if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
-  CZ_CMD+=('--changelog-to-stdout' ">$INPUT_CHANGELOG_INCREMENT_FILENAME")
+  CZ_CMD+=('--changelog-to-stdout')
+  echo "${CZ_CMD[@]}" ">$INPUT_CHANGELOG_INCREMENT_FILENAME"
+  "${CZ_CMD[@]}" >"$INPUT_CHANGELOG_INCREMENT_FILENAME"
+else
+  echo "${CZ_CMD[@]}"
+  "${CZ_CMD[@]}"
 fi
-echo "${CZ_CMD[@]}"
-"${CZ_CMD[@]}"
 
 REV="$(cz version --project)"
 echo "REVISION=${REV}" >>"$GITHUB_ENV"
