@@ -21,6 +21,12 @@ inputs:
     description: 'If true the bump commit is pushed to the remote repository'
     required: false
     default: "true"
+  merge:
+    description: >
+      If true, the bump commit is pushed to the remote repository even when the
+      action is run on the pull_request event, immediately merging the pull request
+    required: false
+    default: "false"
   prerelease:
     description: 'Set as prerelease version'
     required: false
