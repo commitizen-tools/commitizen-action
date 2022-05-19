@@ -3,7 +3,7 @@
 set -e
 
 if [[ -z $INPUT_GITHUB_TOKEN ]]; then
-  echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".'
+  echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".' >&2
   exit 1
 fi
 
