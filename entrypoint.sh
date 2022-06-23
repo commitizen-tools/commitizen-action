@@ -44,7 +44,7 @@ if [[ $INPUT_COMMIT == 'false' ]]; then
   CZ_CMD+=('--files-only')
 fi
 if [[ $INPUT_INCREMENT ]]; then
-  CZ_CMD+=('--increment', "$INPUT_INCREMENT")
+  CZ_CMD+=('--increment' "$INPUT_INCREMENT")
 fi
 if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
   CZ_CMD+=('--changelog-to-stdout')
