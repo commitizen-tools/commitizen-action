@@ -38,39 +38,4 @@
 
 # GoDaddy CODEOWNERS
 # Default
-*               @ gdcorp-action-public-forks/commitizen-action
-
-
-# Governance
-GOVERNANCE.md                       @gdcorp-engineering/goldenimage-governance
-
-
-# Individual 
-Wade Carpenter
-wcarpenter1@godaddy.com 
-
-
-# Individual container-image owners
-
-
-    GitHub Must-have/Should-do/Never-do Guidance
-
-    gdcorp
-    gdcorp
-
-    GitHub Must-have/Should-do/Never-do Guidance
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
+*               @wcarpenter1-godaddy
