@@ -62,3 +62,6 @@ inputs:
     description: "Don't raise the given comma-delimited exit codes"
     required: false
     default: '21'
+  increment:
+    description: "Manually specify the desired increment"
+    required: false

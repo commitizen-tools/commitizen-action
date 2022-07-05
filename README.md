@@ -80,6 +80,7 @@ jobs:
 | `commitizen_version`           | Specify the version to be used by commitizen. Eg: `2.21.0`                                                                                                                                                                        | latest                                                          |
 | `changelog`                    | Create changelog when bumping the version                                                                                                                                                                                         | true                                                            |
 | `no_raise`                     | Don't raise the given comma-delimited exit codes (e.g., no_raise: '20,21'). Use with caution! Open an issue in [commitizen](https://github.com/commitizen-tools/commitizen/issues) if you need help thinking about your workflow. | [21](https://commitizen-tools.github.io/commitizen/exit_codes/) |
+| `increment`                    | Manually specify the desired increment {MAJOR,MINOR,PATCH} | -                                                               |
 
 ## Outputs
 
