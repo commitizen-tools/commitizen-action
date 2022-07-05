@@ -1,3 +1,13 @@
+## 0.14.0 (2022-07-05)
+
+### Fix
+
+- remove bad comma
+
+### Feat
+
+- add increment option
+
 ## 0.13.2 (2022-05-11)
 
 ### Fix
