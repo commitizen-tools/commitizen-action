@@ -1,3 +1,11 @@
+## 0.14.1 (2022-07-07)
+
+### Fix
+
+- Refuse to push on pull_request event
+- Don't pull or push with nothing to push
+- Print error message to stderr
+
 ## 0.14.0 (2022-07-05)
 
 ### Fix
