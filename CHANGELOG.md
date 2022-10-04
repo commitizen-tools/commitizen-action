@@ -1,3 +1,9 @@
+## 0.15.0 (2022-10-04)
+
+### Feat
+
+- add `check-consistency` option
+
 ## 0.14.1 (2022-07-07)
 
 ### Fix
