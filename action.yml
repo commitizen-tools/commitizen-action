@@ -71,3 +71,7 @@ inputs:
   increment:
     description: "Manually specify the desired increment"
     required: false
+  check_consistency:
+    default: false
+    description: "check consistency among versions defined in commitizen configuration and version_files"
+    required: false
