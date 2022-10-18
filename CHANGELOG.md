@@ -1,3 +1,9 @@
+## 0.15.1 (2022-10-18)
+
+### Fix
+
+- Port from set-output to environment files
+
 ## 0.15.0 (2022-10-04)
 
 ### Feat
