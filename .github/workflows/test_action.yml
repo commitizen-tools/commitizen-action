@@ -18,7 +18,7 @@ jobs:
         run: |
           COMMIT_ID="$(git rev-parse "${{ github.head_ref }}")"
           echo "The sha of the starting commit is $COMMIT_ID"
-          echo "::set-output name=commit::$COMMIT_ID"
+          echo "SHA=$COMMIT_ID" >>"$GITHUB_OUTPUT"
       - name: create test commit
         run: |
           touch test_file
@@ -43,7 +43,7 @@ jobs:
           cd new_head
           last_pushed_commit="$(git rev-parse "${{ github.head_ref }}")"
           echo "Commit sha on origin: $last_pushed_commit"
-          if [[ $last_pushed_commit != ${{ steps.capture.outputs.commit }} ]]; then
+          if [[ $last_pushed_commit != ${{ steps.capture.outputs.SHA }} ]]; then
             echo "Something got pushed to ${{ github.head_ref }}"
             exit 1
           fi

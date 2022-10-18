@@ -65,7 +65,7 @@ if [[ $REV == "$PREV_REV" ]]; then
   INPUT_PUSH='false'
 fi
 echo "REVISION=${REV}" >>"$GITHUB_ENV"
-echo "::set-output name=version::${REV}"
+echo "version=${REV}" >>"$GITHUB_OUTPUT"
 
 CURRENT_BRANCH="$(git branch --show-current)"
 INPUT_BRANCH="${INPUT_BRANCH:-$CURRENT_BRANCH}"
