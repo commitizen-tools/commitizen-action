@@ -82,3 +82,9 @@ inputs:
       crazy-max/ghaction-import-gpg)
     required: false
     default: "false"
+  gpg_private_key:
+    description: >
+      The GPG private key to sign commits and tags (for git operations). `gpg_sign` must
+      be set to true.
+    required: false
+    defaul: ''

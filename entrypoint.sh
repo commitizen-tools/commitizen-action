@@ -34,9 +34,14 @@ if [[ $INPUT_NO_RAISE ]]; then
 fi
 CZ_CMD+=('bump' '--yes')
 if [[ $INPUT_GPG_SIGN == 'true' ]]; then
-  git config --global gpg.program gpg
-  git config --global commit.gpgsign true
-  git config --global tag.gpgsign true
+  if [[ -z $INPUT_GPG_PRIVATE_KEY ]]; then
+    echo 'Missing input "gpg_private_key".' >&2
+    exit 2
+  fi
+  git config --local gpg.program gpg
+  git config --local commit.gpgsign true
+  git config --local tag.gpgsign true
+  git config --local user.signingkey "${INPUT_GPG_PRIVATE_KEY}"
   CZ_CMD+=('--gpg-sign')
 fi
 if [[ $INPUT_DRY_RUN == 'true' ]]; then
