@@ -38,9 +38,6 @@ echo "Commitizen version: $(cz version)"
 PREV_REV="$(cz version --project)"
 
 CZ_CMD=('cz')
-if [[ $INPUT_DEBUG == 'true' ]]; then
-  CZ_CMD+=('--debug')
-fi
 if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
 fi
@@ -65,6 +62,9 @@ if [[ $INPUT_INCREMENT ]]; then
 fi
 if [[ $INPUT_CHECK_CONSISTENCY ]]; then
   CZ_CMD+=('--check-consistency')
+fi
+if [[ $INPUT_DEBUG == 'true' ]]; then
+  CZ_CMD+=('--debug')
 fi
 if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
   CZ_CMD+=('--changelog-to-stdout')
