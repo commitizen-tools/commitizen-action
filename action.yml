@@ -87,4 +87,7 @@ inputs:
       The GPG private key to sign commits and tags (for git operations). `gpg_sign` must
       be set to true.
     required: false
-    defaul: ''
+  debug:
+    description: "If true, prints debug output to GitHub Actions stdout."
+    required: false
+    default: "false"
