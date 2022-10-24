@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-set +o posix
 
 if [[ -z $INPUT_GITHUB_TOKEN ]]; then
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".' >&2
@@ -16,62 +15,16 @@ echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
 if [[ $INPUT_GPG_SIGN == 'true' ]]; then
-  if [[ -z $INPUT_GPG_PRIVATE_KEY ]]; then
-    echo 'Missing input "gpg_private_key".' >&2
+  if [[ -z $INPUT_GIT_SIGNINGKEY ]]; then
+    echo 'Missing input "git_signingkey".' >&2
     exit 2
   fi
-  if [[ -z $INPUT_GPG_PASSPHRASE ]]; then
-    echo 'Missing input "gpg_passphrase".' >&2
-    exit 3
-  fi
-
-  echo "Configuring GPG agent..."
-  if [ -f /usr/lib/systemd/user/gpg-agent.service ]; then
-    mkdir ~/.gnupg
-    cat <<EOT >> ~/.gnupg/gpg-agent.conf
-    allow-preset-passphrase
-    default-cache-ttl 60
-    max-cache-ttl 50
-EOT
-    chmod 600 ~/.gnupg/*
-    chmod 700 ~/.gnupg
-    systemctl --user restart gpg-agentarent of 2cf68aa (fix(entrypoint.sh): replace `systemctl`)
-  else
-    gpg-agent --daemon --allow-preset-passphrase \
-    --default-cache-ttl 60 --max-cache-ttl 60
-  fi
-
-  echo "Importing GPG key..."
-  echo -n "${INPUT_GPG_PRIVATE_KEY}" | base64 --decode \
-    | gpg --pinentry-mode loopback \
-      --passphrase-file <(echo "${INPUT_GPG_PASSPHRASE}") \
-      --import
-  GPG_FINGERPRINT=$(gpg -K --with-fingerprint \
-    | sed -n 4p | sed -e 's/ *//g')
-  echo "${GPG_FINGERPRINT}:6:" | gpg --import-ownertrust
-
-  echo "Setting GPG passphrase..."
-  GPG_KEYGRIP=$(gpg --with-keygrip -K \
-    | sed -n '/[S]/{n;p}' \
-    | sed 's/Keygrip = //' \
-    | sed 's/ *//g')
-  GPG_PASSPHRASE_HEX=$(echo -n "${INPUT_GPG_PASSPHRASE}" \
-    | od -A n -t x1 \
-    | tr -d ' ' | tr -d '\n')
-  echo "PRESET_PASSPHRASE $GPG_KEYGRIP -1 $GPG_PASSPHRASE_HEX" | gpg-connect-agent
-
-  echo "Configuring Git for GPG..."
-
-  export CI_SIGNINGKEY_UID=$( \
-    gpg --list-signatures --with-colons \
-    | grep 'sig' \
-    | grep  "${INPUT_GIT_EMAIL}" \
-    | head -n 1 \
-    | cut -d':' -f5 \
-  )
+  echo "Configuring GPG for signing commits and tags..."
+  git config --local gpg.program gpg
   git config --local commit.gpgsign true
   git config --local tag.gpgsign true
-  git config --local user.signingkey "${CI_SIGNINGKEY_UID}"
+  git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
+  echo "Git GPG program: $(git config --get gpg.program)"
   echo "Git sign commits?: $(git config --get commit.gpgsign)"
   echo "Git sign tags?: $(git config --get tag.gpgsign)"
 fi
