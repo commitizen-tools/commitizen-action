@@ -20,10 +20,8 @@ if [[ $INPUT_GPG_SIGN == 'true' ]]; then
     exit 2
   fi
   echo "Configuring GPG for signing commits and tags..."
-  echo "gpg -K"
-  gpg -K
-  gpg --list-secret-keys --keyid-format=LONG
-  echo "Git setup..."
+  echo "which gpg"
+  which gpg
   git config --local commit.gpgsign true
   git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
 fi
