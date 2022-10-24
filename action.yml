@@ -72,7 +72,7 @@ inputs:
     description: "Manually specify the desired increment"
     required: false
   check_consistency:
-    default: false
+    default: 'false'
     description: "check consistency among versions defined in commitizen configuration and version_files"
     required: false
   gpg_sign:
@@ -82,10 +82,9 @@ inputs:
       crazy-max/ghaction-import-gpg)
     required: false
     default: "false"
-  gpg_private_key:
+  git_signingkey:
     description: >
-      The GPG private key to sign commits and tags (for git operations). `gpg_sign` must
-      be set to true.
+      The UID for the GPG key git will use to sign commits and tags (for git operations). `gpg_sign` must be set to true.
     required: false
   debug:
     description: "If true, prints debug output to GitHub Actions stdout."

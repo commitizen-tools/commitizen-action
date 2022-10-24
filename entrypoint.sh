@@ -15,14 +15,14 @@ echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
 if [[ $INPUT_GPG_SIGN == 'true' ]]; then
-  if [[ -z $INPUT_GPG_PRIVATE_KEY ]]; then
-    echo 'Missing input "gpg_private_key".' >&2
+  if [[ -z $INPUT_GIT_SIGNINGKEY ]]; then
+    echo 'Missing input "git_signingkey".' >&2
     exit 2
   fi
   echo "Configuring GPG for signing commits and tags..."
   git config --local commit.gpgsign true
   git config --local tag.gpgsign true
-  git config --local user.signingkey "${INPUT_GPG_PRIVATE_KEY}"
+  git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
   echo "Git sign commits?: $(git config --get commit.gpgsign)"
   echo "Git sign tags?: $(git config --get tag.gpgsign)"
 fi
