@@ -35,7 +35,7 @@ if [[ $INPUT_GPG_SIGN == 'true' ]]; then
 EOT
     chmod 600 ~/.gnupg/*
     chmod 700 ~/.gnupg
-    systemctl --user restart gpg-agent
+    sudo service gpg-agent restart
   else
     gpg-agent --daemon --allow-preset-passphrase \
     --default-cache-ttl 60 --max-cache-ttl 60
