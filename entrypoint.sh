@@ -20,6 +20,8 @@ if [[ $INPUT_GPG_SIGN == 'true' ]]; then
     exit 2
   fi
   echo "Configuring GPG for signing commits and tags..."
+  which gpg | git config --local gpg.program
+  git config --local tag.gpgsign true
   git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
 fi
 
@@ -45,9 +47,6 @@ if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
 fi
 CZ_CMD+=('bump' '--yes')
-if [[ $INPUT_GPG_SIGN == 'true' ]]; then
-  CZ_CMD+=('--gpg-sign')
-fi
 if [[ $INPUT_DRY_RUN == 'true' ]]; then
   CZ_CMD+=('--dry-run')
 fi
