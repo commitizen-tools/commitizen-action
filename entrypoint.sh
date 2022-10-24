@@ -20,8 +20,6 @@ if [[ $INPUT_GPG_SIGN == 'true' ]]; then
     exit 2
   fi
   echo "Configuring GPG for signing commits and tags..."
-  git config --local commit.gpgsign true
-  git config --local tag.gpgsign true
   git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
 fi
 
@@ -42,6 +40,9 @@ PREV_REV="$(cz version --project)"
 CZ_CMD=('cz')
 if [[ $INPUT_DEBUG == 'true' ]]; then
   CZ_CMD+=('--debug')
+fi
+if [[ $INPUT_GPG_SIGN == 'true' ]]; then
+  CZ_CMD+=('--gpg-sign')
 fi
 if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
