@@ -34,6 +34,9 @@ if [[ $INPUT_NO_RAISE ]]; then
 fi
 CZ_CMD+=('bump' '--yes')
 if [[ $INPUT_GPG_SIGN == 'true' ]]; then
+  git config --global gpg.program gpg
+  git config --global commit.gpgsign true
+  git config --global tag.gpgsign true
   CZ_CMD+=('--gpg-sign')
 fi
 if [[ $INPUT_DRY_RUN == 'true' ]]; then
