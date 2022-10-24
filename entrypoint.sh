@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
@@ -33,6 +33,9 @@ if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
 fi
 CZ_CMD+=('bump' '--yes')
+if [[ $INPUT_GPG_SIGN == 'true' ]]; then
+  CZ_CMD+=('--gpg-sign')
+fi
 if [[ $INPUT_DRY_RUN == 'true' ]]; then
   CZ_CMD+=('--dry-run')
 fi
