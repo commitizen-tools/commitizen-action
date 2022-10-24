@@ -35,7 +35,7 @@ if [[ $INPUT_GPG_SIGN == 'true' ]]; then
 EOT
     chmod 600 ~/.gnupg/*
     chmod 700 ~/.gnupg
-    service gpg-agent restart
+    systemctl --user restart gpg-agentarent of 2cf68aa (fix(entrypoint.sh): replace `systemctl`)
   else
     gpg-agent --daemon --allow-preset-passphrase \
     --default-cache-ttl 60 --max-cache-ttl 60
