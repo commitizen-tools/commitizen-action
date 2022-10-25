@@ -2,6 +2,8 @@
 
 set -e
 
+gpg --version
+
 if [[ -z $INPUT_GITHUB_TOKEN ]]; then
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".' >&2
   exit 1
