@@ -82,10 +82,6 @@ inputs:
       crazy-max/ghaction-import-gpg)
     required: false
     default: "false"
-  git_signingkey:
-    description: >
-      The UID for the GPG key git will use to sign commits and tags (for git operations). `gpg_sign` must be set to true.
-    required: false
   debug:
     description: "If true, prints debug output to GitHub Actions stdout."
     required: false

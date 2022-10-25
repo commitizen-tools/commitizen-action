@@ -14,18 +14,6 @@ git config --local pull.rebase true
 echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
-if [[ $INPUT_GPG_SIGN == 'true' ]]; then
-  if [[ -z $INPUT_GIT_SIGNINGKEY ]]; then
-    echo 'Missing input "git_signingkey".' >&2
-    exit 2
-  fi
-  echo "Configuring GPG for signing commits and tags..."
-  echo "which gpg"
-  which gpg
-  git config --local commit.gpgsign true
-  git config --local user.signingkey "${INPUT_GIT_SIGNINGKEY}"
-fi
-
 PIP_CMD=('pip' 'install')
 if [[ $INPUT_COMMITIZEN_VERSION == 'latest' ]]; then
   PIP_CMD+=('commitizen')
