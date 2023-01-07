@@ -1,3 +1,14 @@
+## 0.16.0 (2023-01-07)
+
+### Feat
+
+- **entrypoing.sh**: add `gpg` sign
+- **debug**: add option for debug output
+
+### Fix
+
+- check_consistency flag being ignored
+
 ## 0.15.1 (2022-10-18)
 
 ### Fix
