@@ -2,3 +2,5 @@
 name = "cz_conventional_commits"
 version = "0.15.1"
 format = "v$version"
+update_changelog_on_bump = true
+major_version_zero = true
