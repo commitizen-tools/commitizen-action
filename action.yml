@@ -72,6 +72,17 @@ inputs:
     description: "Manually specify the desired increment"
     required: false
   check_consistency:
-    default: false
+    default: 'false'
     description: "check consistency among versions defined in commitizen configuration and version_files"
     required: false
+  gpg_sign:
+    description: >
+      If true, use GPG to sign commits and tags (for git operations). Requires separate
+      setup of GPG key and passphrase in GitHub Actions (e.g. with the action
+      crazy-max/ghaction-import-gpg)
+    required: false
+    default: "false"
+  debug:
+    description: "If true, prints debug output to GitHub Actions stdout."
+    required: false
+    default: "false"

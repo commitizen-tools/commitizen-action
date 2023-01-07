@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
+
+gpg --version
 
 if [[ -z $INPUT_GITHUB_TOKEN ]]; then
   echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}".' >&2
@@ -29,10 +31,16 @@ echo "Commitizen version: $(cz version)"
 PREV_REV="$(cz version --project)"
 
 CZ_CMD=('cz')
+if [[ $INPUT_DEBUG == 'true' ]]; then
+  CZ_CMD+=('--debug')
+fi
 if [[ $INPUT_NO_RAISE ]]; then
   CZ_CMD+=('--no-raise' "$INPUT_NO_RAISE")
 fi
 CZ_CMD+=('bump' '--yes')
+if [[ $INPUT_GPG_SIGN == 'true' ]]; then
+  CZ_CMD+=('--gpg-sign')
+fi
 if [[ $INPUT_DRY_RUN == 'true' ]]; then
   CZ_CMD+=('--dry-run')
 fi
