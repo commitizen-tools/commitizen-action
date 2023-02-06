@@ -1,3 +1,9 @@
+## 0.16.2 (2023-02-06)
+
+### Fix
+
+- change docker image version back to 3.8 (#59)
+
 ## 0.16.1 (2023-02-05)
 
 ### Fix
