@@ -1,3 +1,9 @@
+## 0.16.3 (2023-02-09)
+
+### Fix
+
+- missing `libffi-dev` in `Dockerfile` which breaks third party plugins (#60)
+
 ## 0.16.2 (2023-02-06)
 
 ### Fix
