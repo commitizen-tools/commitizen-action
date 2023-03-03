@@ -1,3 +1,9 @@
+## 0.17.0 (2023-03-03)
+
+### Feat
+
+- add support for SSH deploy keys (#64)
+
 ## 0.16.3 (2023-02-09)
 
 ### Fix
