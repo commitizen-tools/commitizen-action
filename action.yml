@@ -36,7 +36,11 @@ inputs:
     required: false
   github_token:
     description: 'Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}'
-    required: true
+    required: false
+  use_ssh:
+    description: 'Set to true if ssh-key has been configured for the actions/checkout'
+    required: false
+    default: "false"
   repository:
     description: 'Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})'
     default: ''
