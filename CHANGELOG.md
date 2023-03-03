@@ -1,3 +1,9 @@
+## 0.17.1 (2023-03-03)
+
+### Fix
+
+- add openssh to Dockerfile
+
 ## 0.17.0 (2023-03-03)
 
 ### Feat
