@@ -66,8 +66,7 @@ jobs:
 
 | Name                           | Description                                                                                                                                                                                                                       | Default                                                         |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}`. Required if `use_ssh: false`                                                                                                                            | -                                                               |
-| `use_ssh`                      | Set to true if ssh-key has been configured for the `actions/checkout`                                                                                                                                                               | `false`                                                         |
+| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}`. Required if `push: true`                                                                                                                                | -                                                               |
 | `dry_run`                      | Run without creating commit, output to stdout                                                                                                                                                                                     | false                                                           |
 | `repository`                   | Repository name to push. Default or empty value represents current github repository                                                                                                                                              | current one                                                     |
 | `branch`                       | Destination branch to push changes                                                                                                                                                                                                | Same as the one executing the action by default                 |
@@ -119,11 +118,49 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ssh-key: '${{ secrets.COMMIT_KEY }}'
+          ssh-key: "${{ secrets.COMMIT_KEY }}"
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
         with:
-          use_ssh: true
+          push: false
+      - name: Push using ssh
+        run: |
+          git push origin main --tags
+```
+
+## Creating a Github release
+
+```yaml
+name: Bump version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+    name: "Bump version and create changelog with commitizen"
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: "${{ secrets.PERSONAL_ACCESS_TOKEN }}"
+      - name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          changelog_increment_filename: body.md
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: "body.md"
+          tag_name: ${{ env.REVISION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Troubleshooting

@@ -6,7 +6,6 @@ RUN set -eux; \
         gpg \
         alpine-sdk \
         bash \
-        openssh \
         libffi-dev \
     ;
 COPY entrypoint.sh /entrypoint.sh

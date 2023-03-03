@@ -6,8 +6,8 @@ set -e
 gpg --version
 git --version
 
-if [[ -z $INPUT_GITHUB_TOKEN && $INPUT_USE_SSH != "true" ]]; then
-  echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}" or "use_ssh", choose one.' >&2
+if [[ -z $INPUT_GITHUB_TOKEN && $INPUT_PUSH == "true" ]]; then
+  echo 'Missing input "github_token: ${{ secrets.GITHUB_TOKEN }}" which is required to push.' >&2
   exit 1
 fi
 
@@ -92,10 +92,6 @@ if [[ $INPUT_PUSH == 'true' ]]; then
   if [[ $INPUT_MERGE != 'true' && $GITHUB_EVENT_NAME == 'pull_request' ]]; then
     echo "Refusing to push on pull_request event since that would merge the pull request." >&2
     echo "You probably want to run on push to your default branch instead." >&2
-  elif [[ $INPUT_USE_SSH == "true" ]]; then
-    echo "Pushing to branch using SSH..."
-    REMOTE_REPO="git@github.com:${INPUT_REPOSITORY}.git"
-    git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}" --tags
   else
     echo "Pushing to branch..."
     REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${INPUT_REPOSITORY}.git"
