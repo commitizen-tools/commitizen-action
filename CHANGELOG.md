@@ -1,3 +1,13 @@
+## 0.18.0 (2023-03-03)
+
+### BREAKING CHANGE
+
+- Remove `use_ssh`. Documentation is in place to deploy using SSH keys
+
+### Fix
+
+- remove use_ssh flag (#65)
+
 ## 0.17.1 (2023-03-03)
 
 ### Fix
