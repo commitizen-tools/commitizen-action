@@ -49,7 +49,7 @@ jobs:
     name: "Bump version and create changelog with commitizen"
     steps:
       - name: Check out
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
@@ -66,7 +66,8 @@ jobs:
 
 | Name                           | Description                                                                                                                                                                                                                       | Default                                                         |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` **required**                                                                                                                                             | -                                                               |
+| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}`. Required if `use_ssh: false`                                                                                                                            | -                                                               |
+| `use_ssh`                      | Set to true if ssh-key has been configured for the `actions/checkout`                                                                                                                                                               | `false`                                                         |
 | `dry_run`                      | Run without creating commit, output to stdout                                                                                                                                                                                     | false                                                           |
 | `repository`                   | Repository name to push. Default or empty value represents current github repository                                                                                                                                              | current one                                                     |
 | `branch`                       | Destination branch to push changes                                                                                                                                                                                                | Same as the one executing the action by default                 |
@@ -93,6 +94,37 @@ jobs:
 | `version` | The new version |
 
 The new version is also available as an environment variable under `REVISION` or you can access using `${{ steps.cz.outputs.version }}`
+
+## Using SSH with deploy keys
+
+1. Create a [deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys) (which is the SSH **public key**)
+2. Add the **private key** as a [Secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in your repository, e.g: `COMMIT_KEY`
+3. Set up your action
+
+```yaml
+name: Bump version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+    name: "Bump version and create changelog with commitizen"
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ssh-key: '${{ secrets.COMMIT_KEY }}'
+      - name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          use_ssh: true
+```
 
 ## Troubleshooting
 
