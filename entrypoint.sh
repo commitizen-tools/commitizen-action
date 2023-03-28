@@ -81,6 +81,7 @@ fi
 echo "REVISION=${REV}" >>"$GITHUB_ENV"
 echo "version=${REV}" >>"$GITHUB_OUTPUT"
 
+GITHUB_DOMAIN=${GITHUB_SERVER_URL#*//}
 CURRENT_BRANCH="$(git branch --show-current)"
 INPUT_BRANCH="${INPUT_BRANCH:-$CURRENT_BRANCH}"
 INPUT_REPOSITORY="${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}"
@@ -94,7 +95,7 @@ if [[ $INPUT_PUSH == 'true' ]]; then
     echo "You probably want to run on push to your default branch instead." >&2
   else
     echo "Pushing to branch..."
-    REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${INPUT_REPOSITORY}.git"
+    REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@${GITHUB_DOMAIN}/${INPUT_REPOSITORY}.git"
     git pull "$REMOTE_REPO" "$INPUT_BRANCH"
     git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}" --tags
   fi
