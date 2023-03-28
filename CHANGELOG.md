@@ -1,3 +1,9 @@
+## 0.18.1 (2023-03-28)
+
+### Fix
+
+- Add support for GitHub Enterprise Server (#66)
+
 ## 0.18.0 (2023-03-03)
 
 ### BREAKING CHANGE
