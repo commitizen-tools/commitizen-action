@@ -1,3 +1,9 @@
+## 0.18.2 (2023-05-18)
+
+### Fix
+
+- install git-lfs into the dockerfile
+
 ## 0.18.1 (2023-03-28)
 
 ### Fix
