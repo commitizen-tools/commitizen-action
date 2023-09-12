@@ -69,6 +69,9 @@ if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
   CZ_CMD+=('--changelog-to-stdout')
   echo "${CZ_CMD[@]}" ">$INPUT_CHANGELOG_INCREMENT_FILENAME"
   "${CZ_CMD[@]}" >"$INPUT_CHANGELOG_INCREMENT_FILENAME"
+  if [[ $INPUT_NO_VERIFY == 'true' ]]; then
+    CZ_CMD+=('--no-verify')
+  fi
 else
   echo "${CZ_CMD[@]}"
   "${CZ_CMD[@]}"

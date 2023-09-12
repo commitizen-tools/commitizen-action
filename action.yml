@@ -83,6 +83,10 @@ inputs:
     required: false
     default: "false"
   debug:
-    description: "If true, prints debug output to GitHub Actions stdout."
+    description: 'If true, prints debug output to GitHub Actions stdout.'
     required: false
-    default: "false"
+    default: 'false'
+  no_verify:
+    description: 'If true, bypasses the pre-commit and commit-msg hooks'
+    required: false
+    default: 'false'

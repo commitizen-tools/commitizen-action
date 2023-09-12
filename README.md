@@ -85,6 +85,7 @@ jobs:
 | `check_consistency`            | Check consistency among versions defined in commitizen configuration and version_files                                                                                                                                            | `false`                                                         |
 | `gpg_sign`                     | If true, use GPG to sign commits and tags (for git operations). Requires separate setup of GPG key and passphrase in GitHub Actions (e.g. with the action `crazy-max/ghaction-import-gpg`)                                        | `false`                                                         |
 | `debug`                        | Prints debug output to GitHub Actions stdout                                                                                                                                                                                      | `false`                                                         |
+| `no_verify`                    | If true, bypasses the pre-commit and commit-msg hooks                                                                                                                                                                             | false                                                           |
 
 ## Outputs
 
