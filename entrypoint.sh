@@ -65,6 +65,9 @@ fi
 if [[ $INPUT_CHECK_CONSISTENCY ]]; then
   CZ_CMD+=('--check-consistency')
 fi
+if [[ $INPUT_GIT_REDIRECT_STDERR == 'true' ]]; then
+  CZ_CMD+=('--git-output-to-stderr')
+fi
 if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
   CZ_CMD+=('--changelog-to-stdout')
   echo "${CZ_CMD[@]}" ">$INPUT_CHANGELOG_INCREMENT_FILENAME"
