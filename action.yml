@@ -30,6 +30,13 @@ inputs:
   prerelease:
     description: 'Set as prerelease version'
     required: false
+  devrelease:
+    description: 'Non-negative integer for dev. release'
+    required: false
+  local_version:
+    description: 'Bump only the local version portion'
+    required: false
+    default: "false"
   changelog:
     description: 'Create changelog when bumping the version'
     default: "true"
