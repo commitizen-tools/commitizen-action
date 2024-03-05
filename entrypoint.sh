@@ -35,6 +35,7 @@ echo "${PIP_CMD[@]}"
 echo "Commitizen version: $(cz version)"
 
 PREV_REV="$(cz version --project)"
+echo "PREVIOUS_REVISION=${PREV_REV}" >>"$GITHUB_ENV"
 
 CZ_CMD=('cz')
 if [[ $INPUT_DEBUG == 'true' ]]; then
