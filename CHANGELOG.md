@@ -1,3 +1,10 @@
+## 0.21.0 (2024-03-05)
+
+### Feat
+
+- add local version and devrelease as inputs (#69)
+- Add PREVIOUS_REVISION to environment
+
 ## 0.20.0 (2023-09-14)
 
 ### Feat
