@@ -10,6 +10,9 @@ outputs:
   version:
     description: 'New version'
 inputs:
+  working_directory:
+    description: 'Change to this directory before running'
+    required: false
   dry_run:
     description: 'Run without creating commit, output to stdout'
     required: false

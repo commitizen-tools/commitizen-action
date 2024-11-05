@@ -34,6 +34,10 @@ echo "${PIP_CMD[@]}"
 "${PIP_CMD[@]}"
 echo "Commitizen version: $(cz version)"
 
+if [[ $INPUT_WORKING_DIRECTORY ]]; then
+  cd $INPUT_WORKING_DIRECTORY
+fi
+
 PREV_REV="$(cz version --project)"
 echo "PREVIOUS_REVISION=${PREV_REV}" >>"$GITHUB_ENV"
 
