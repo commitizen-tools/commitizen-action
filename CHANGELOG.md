@@ -1,3 +1,9 @@
+## 0.22.0 (2024-11-06)
+
+### Feat
+
+- add working-directory input
+
 ## 0.21.0 (2024-03-05)
 
 ### Feat
