@@ -73,7 +73,7 @@ fi
 if [[ $INPUT_INCREMENT ]]; then
   CZ_CMD+=('--increment' "$INPUT_INCREMENT")
 fi
-if [[ $INPUT_CHECK_CONSISTENCY ]]; then
+if [[ $INPUT_CHECK_CONSISTENCY == 'true' ]]; then
   CZ_CMD+=('--check-consistency')
 fi
 if [[ $INPUT_GIT_REDIRECT_STDERR == 'true' ]]; then
