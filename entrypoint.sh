@@ -87,6 +87,11 @@ else
   echo "${CZ_CMD[@]}"
   "${CZ_CMD[@]}"
 fi
+if [[ $INPUT_ACTOR ]]; then
+  ACTOR=$INPUT_ACTOR
+else
+  ACTOR=$GITHUB_ACTOR
+fi
 
 REV="$(cz version --project)"
 if [[ $REV == "$PREV_REV" ]]; then
@@ -101,7 +106,7 @@ INPUT_BRANCH="${INPUT_BRANCH:-$CURRENT_BRANCH}"
 INPUT_REPOSITORY="${INPUT_REPOSITORY:-$GITHUB_REPOSITORY}"
 
 echo "Repository: ${INPUT_REPOSITORY}"
-echo "Actor: ${GITHUB_ACTOR}"
+echo "Actor: ${ACTOR}"
 
 if [[ $INPUT_PUSH == 'true' ]]; then
   if [[ $INPUT_MERGE != 'true' && $GITHUB_EVENT_NAME == 'pull_request' ]]; then
@@ -109,7 +114,7 @@ if [[ $INPUT_PUSH == 'true' ]]; then
     echo "You probably want to run on push to your default branch instead." >&2
   else
     echo "Pushing to branch..."
-    REMOTE_REPO="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@${GITHUB_DOMAIN}/${INPUT_REPOSITORY}.git"
+    REMOTE_REPO="https://${ACTOR}:${INPUT_GITHUB_TOKEN}@${GITHUB_DOMAIN}/${INPUT_REPOSITORY}.git"
     git pull "$REMOTE_REPO" "$INPUT_BRANCH"
     git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}" --tags
   fi
