@@ -65,7 +65,7 @@ if [[ $INPUT_DEVRELEASE ]]; then
   CZ_CMD+=('--devrelease' "$INPUT_DEVRELEASE")
 fi
 if [[ $INPUT_LOCAL_VERSION == 'true' ]]; then
-  CZ_CMD+=('--local_version')
+  CZ_CMD+=('--local-version')
 fi
 if [[ $INPUT_COMMIT == 'false' ]]; then
   CZ_CMD+=('--files-only')
