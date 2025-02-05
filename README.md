@@ -52,12 +52,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: "${{ secrets.GITHUB_TOKEN }}"
       - id: cz
         name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Print Version
         run: echo "Bumped to version ${{ steps.cz.outputs.version }}"
 ```
@@ -66,7 +63,7 @@ jobs:
 
 | Name                           | Description                                                                                                                                                                                                                       | Default                                                         |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}`. Required if `push: true`                                                                                                                                | -                                                               |
+| `github_token`                 | Token for the repo. Can be passed in using `${{ secrets.GITHUB_TOKEN }}` if your want to use a custom PAT                                                                                                                         | `${{ github.token }}`                                           |
 | `working_directory`            | Change to this directory before running                                                                                                                                                                                           | repo root directory                                             |
 | `dry_run`                      | Run without creating commit, output to stdout                                                                                                                                                                                     | false                                                           |
 | `repository`                   | Repository name to push. Default or empty value represents current github repository                                                                                                                                              | current one                                                     |
