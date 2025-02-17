@@ -79,6 +79,9 @@ fi
 if [[ $INPUT_GIT_REDIRECT_STDERR == 'true' ]]; then
   CZ_CMD+=('--git-output-to-stderr')
 fi
+if [[ $INPUT_MANUAL_VERSION ]]; then
+  CZ_CMD+=("$INPUT_MANUAL_VERSION")
+fi
 if [[ $INPUT_CHANGELOG_INCREMENT_FILENAME ]]; then
   CZ_CMD+=('--changelog-to-stdout')
   echo "${CZ_CMD[@]}" ">$INPUT_CHANGELOG_INCREMENT_FILENAME"
