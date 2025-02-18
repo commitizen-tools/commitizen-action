@@ -18,7 +18,6 @@ git config --global --add safe.directory "*"
 
 git config --local user.name "${INPUT_GIT_NAME}"
 git config --local user.email "${INPUT_GIT_EMAIL}"
-git config --local pull.rebase true
 echo "Git name: $(git config --get user.name)"
 echo "Git email: $(git config --get user.email)"
 
@@ -115,8 +114,13 @@ if [[ $INPUT_PUSH == 'true' ]]; then
   else
     echo "Pushing to branch..."
     REMOTE_REPO="https://${ACTOR}:${INPUT_GITHUB_TOKEN}@${GITHUB_DOMAIN}/${INPUT_REPOSITORY}.git"
-    git pull "$REMOTE_REPO" "$INPUT_BRANCH"
-    git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}" --tags
+    git push "$REMOTE_REPO" "HEAD:${INPUT_BRANCH}"
+    if [[ $1 -ne 0 ]]; then
+      echo "Failed to push to branch" >&2
+      exit 1
+    fi
+    TAG="$(git describe --tags --abbrev=0)"
+    git push "$REMOTE_REPO" "HEAD:${TAG}"
   fi
 else
   echo "Not pushing"
