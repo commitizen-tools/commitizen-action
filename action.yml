@@ -103,3 +103,6 @@ inputs:
   actor:
     description: "The account that will be used to perform git operations, defaults to the GITHUB_ACTOR"
     required: false
+  manual_version:
+    description: "Manually specify the version to bump to"
+    required: false
