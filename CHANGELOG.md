@@ -1,3 +1,9 @@
+## 0.24.0 (2025-02-25)
+
+### Feat
+
+- add support for manual version bumping
+
 ## 0.23.1 (2024-12-21)
 
 ## 0.23.0 (2024-12-09)
