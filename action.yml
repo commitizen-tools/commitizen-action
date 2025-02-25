@@ -47,6 +47,7 @@ inputs:
   github_token:
     description: 'Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}'
     required: false
+    default: ${{ github.token }}
   repository:
     description: "Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})"
     default: ""
