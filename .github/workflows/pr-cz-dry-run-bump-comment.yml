@@ -1,0 +1,41 @@
+name: CZ Dry Run Bump on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  cz_dry_run_comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: Run cz bump --dry-run
+        run: |
+          echo '## 🔍 Commitizen Dry Run Preview' > comment.md
+          echo '```' >> comment.md
+          poetry run cz bump --dry-run >> comment.md
+          echo '```' >> comment.md
+
+      - name: Comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: comment.md
+          body-includes: "## 🔍 Commitizen Dry Run Preview"
+          edit-mode: replace
