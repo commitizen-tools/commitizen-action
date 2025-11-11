@@ -49,7 +49,7 @@ jobs:
     name: "Bump version and create changelog with commitizen"
     steps:
       - name: Check out
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: "${{ secrets.GITHUB_TOKEN }}"
@@ -80,7 +80,7 @@ jobs:
 | `push`                         | Define if the changes should be pushed to the branch.                                                                                                                                                                             | true                                                            |
 | `merge`                        | Define if the changes should be pushed even on the pull_request event, immediately merging the pull request.                                                                                                                      | false                                                           |
 | `commit`                       | Define if the changes should be committed to the branch.                                                                                                                                                                          | true                                                            |
-| `commitizen_version`           | Specify the version to be used by commitizen. Eg: `2.21.                                                                                                                                                                          | latest                                                          |
+| `commitizen_version`           | Specify the version to be used by commitizen. Eg: `4.10.0`                                                                                                                                                                        | latest                                                          |
 | `changelog`                    | Create changelog when bumping the version                                                                                                                                                                                         | true                                                            |
 | `no_raise`                     | Don't raise the given comma-delimited exit codes (e.g., no_raise: '20,21'). Use with caution! Open an issue in [commitizen](https://github.com/commitizen-tools/commitizen/issues) if you need help thinking about your workflow. | [21](https://commitizen-tools.github.io/commitizen/exit_codes/) |
 | `increment`                    | Manually specify the desired increment {MAJOR,MINOR, PATCH}                                                                                                                                                                       | -                                                               |
@@ -90,9 +90,15 @@ jobs:
 
 ## Outputs
 
-| Name      | Description     |
-| --------- | --------------- |
-| `version` | The new version |
+| Name                     | Description                                                             |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `version`                | The next version (same as `next_version`, kept for historical purposes) |
+| `next_version`           | Next version                                                            |
+| `next_version_major`     | Only the major version of the next version                              |
+| `next_version_minor`     | Only the minor version of the next version                              |
+| `previous_version`       | Version before the bump                                                 |
+| `previous_version_major` | Only the major version of the previous version                          |
+| `previous_version_minor` | Only the minor version of the previous version                          |
 
 The new version is also available as an environment variable under `REVISION` or you can access using `${{ steps.cz.outputs.version }}`
 
@@ -175,6 +181,12 @@ actions [by design][by_design].
 To solve it, you must use a personal access token in the checkout and the commitizen steps.
 
 Follow the instructions in [commitizen's documentation][cz-docs-ga].
+
+Alternatively, you can try using the `gh` cli in your github action:
+
+```sh
+gh workflow run <workflow.yaml> ...
+```
 
 ## I'm not using conventional commits, I'm using my own set of rules on commits
 
