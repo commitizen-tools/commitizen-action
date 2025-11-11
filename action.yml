@@ -7,8 +7,20 @@ branding:
   icon: "git-commit"
   color: "purple"
 outputs:
-  version:
+  version: # old classic next_version
     description: "New version"
+  next_version:
+    description: "Next version"
+  next_version_major:
+    description: "Only the major version of the next version"
+  next_version_minor:
+    description: "Only the minor version of the next version"
+  previous_version:
+    description: "Version before the bump"
+  previous_version_major:
+    description: "Only the major version of the previous version"
+  previous_version_minor:
+    description: "Only the minor version of the previous version"
 inputs:
   working_directory:
     description: "Change to this directory before running"

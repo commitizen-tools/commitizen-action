@@ -8,11 +8,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           ref: "${{ github.event.pull_request.head.ref }}"
           repository: "${{ github.event.pull_request.head.repo.full_name }}"
-          fetch-depth: 0  # ensures that tags are fetched, seems to be needed
+          fetch-depth: 0 # ensures that tags are fetched, seems to be needed
       - name: Capture commit id
         id: capture
         run: |
@@ -28,15 +28,25 @@ jobs:
           git commit -m "feat: test feature"
       - name: test action
         uses: ./
+        id: cz
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           commit: false
           push: false
-      - uses: actions/checkout@v2
+      - name: check outputs
+        run: |
+          echo "version: ${{ steps.cz.outputs.version }}"
+          echo "next_version: ${{ steps.cz.outputs.next_version }}"
+          echo "next_version_major: ${{ steps.cz.outputs.next_version_major }}"
+          echo "next_version_minor: ${{ steps.cz.outputs.next_version_minor }}"
+          echo "previous_version: ${{ steps.cz.outputs.previous_version }}"
+          echo "previous_version_major: ${{ steps.cz.outputs.previous_version_major }}"
+          echo "previous_version_minor: ${{ steps.cz.outputs.previous_version_minor }}"
+      - uses: actions/checkout@v5
         with:
           ref: "${{ github.event.pull_request.head.ref }}"
           repository: "${{ github.event.pull_request.head.repo.full_name }}"
-          fetch-depth: 0  # ensures that tags are fetched, seems to be needed
+          fetch-depth: 0 # ensures that tags are fetched, seems to be needed
           path: new_head
       - name: Test push
         run: |
