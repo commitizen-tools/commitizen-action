@@ -1,3 +1,13 @@
+## 0.25.0 (2025-11-16)
+
+### BREAKING CHANGE
+
+- This update requires commitizen > 4.10 in order to use --minor and --major
+
+### Feat
+
+- add more output information
+
 ## 0.24.0 (2025-02-25)
 
 ### Feat
