@@ -1,3 +1,9 @@
+## 0.26.0 (2025-11-19)
+
+### Feat
+
+- add gpg-agent
+
 ## 0.25.0 (2025-11-16)
 
 ### BREAKING CHANGE
