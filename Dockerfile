@@ -5,6 +5,7 @@ RUN set -eux; \
         git \
         git-lfs \
         gpg \
+        gpg-agent \
         alpine-sdk \
         bash \
         libffi-dev \
