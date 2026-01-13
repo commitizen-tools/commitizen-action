@@ -88,6 +88,9 @@ fi
 if [[ $INPUT_GIT_REDIRECT_STDERR == 'true' ]]; then
   CZ_CMD+=('--git-output-to-stderr')
 fi
+if [[ $INPUT_BUILD_METADATA ]]; then
+  CZ_CMD+=('--build-metadata' "$INPUT_BUILD_METADATA")
+fi
 if [[ $INPUT_MANUAL_VERSION ]]; then
   CZ_CMD+=("$INPUT_MANUAL_VERSION")
 fi
