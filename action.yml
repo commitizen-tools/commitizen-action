@@ -52,6 +52,10 @@ inputs:
     description: "Bump only the local version portion"
     required: false
     default: "false"
+  build_metadata:
+    description: Specifies additional metadata in the version string.
+    required: false
+    default: ""
   changelog:
     description: "Create changelog when bumping the version"
     default: "true"
