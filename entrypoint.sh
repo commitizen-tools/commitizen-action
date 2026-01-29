@@ -53,7 +53,7 @@ echo "previous_version_minor=${PREV_REV_MINOR}" >>"$GITHUB_OUTPUT"
 CZ_CMD=('cz')
 
 if [[ $INPUT_CONFIG ]]; then
-  CZ_CMD+=('--config' "$CONFIG")
+  CZ_CMD+=('--config' "$INPUT_CONFIG")
 fi
 
 if [[ $INPUT_DEBUG == 'true' ]]; then
