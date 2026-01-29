@@ -108,6 +108,10 @@ else
   ACTOR=$GITHUB_ACTOR
 fi
 
+if [[ $INPUT_CONFIG ]]; then
+  CZ_CMD+=("--config ${CONFIG}")
+fi
+
 REV="$(cz version --project)"
 if [[ $REV == "$PREV_REV" ]]; then
   INPUT_PUSH='false'
