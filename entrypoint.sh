@@ -51,6 +51,11 @@ echo "previous_version_minor=${PREV_REV_MINOR}" >>"$GITHUB_OUTPUT"
 
 
 CZ_CMD=('cz')
+
+if [[ $INPUT_CONFIG ]]; then
+  CZ_CMD+=("--config ${CONFIG}")
+fi
+
 if [[ $INPUT_DEBUG == 'true' ]]; then
   CZ_CMD+=('--debug')
 fi
@@ -106,10 +111,6 @@ if [[ $INPUT_ACTOR ]]; then
   ACTOR=$INPUT_ACTOR
 else
   ACTOR=$GITHUB_ACTOR
-fi
-
-if [[ $INPUT_CONFIG ]]; then
-  CZ_CMD+=("--config ${CONFIG}")
 fi
 
 REV="$(cz version --project)"
