@@ -1,3 +1,9 @@
+## 0.27.1 (2026-02-17)
+
+### Fix
+
+- correctly set next_version_major and next_version_minor outputs
+
 ## 0.27.0 (2026-01-17)
 
 ### Feat
