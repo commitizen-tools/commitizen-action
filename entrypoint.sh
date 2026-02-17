@@ -118,10 +118,10 @@ echo "next_version=${REV}" >>"$GITHUB_OUTPUT"
 
 NEXT_REV_MAJOR="$(cz version --project --major)"
 echo "NEXT_REVISION_MAJOR=${NEXT_REV_MAJOR}" >>"$GITHUB_ENV"
-echo "next_version_major=${REV}" >>"$GITHUB_OUTPUT"
+echo "next_version_major=${NEXT_REV_MAJOR}" >>"$GITHUB_OUTPUT"
 NEXT_REV_MINOR="$(cz version --project --minor)"
 echo "NEXT_REVISION_MINOR=${NEXT_REV_MINOR}" >>"$GITHUB_ENV"
-echo "next_version_minor=${REV}" >>"$GITHUB_OUTPUT"
+echo "next_version_minor=${NEXT_REV_MINOR}" >>"$GITHUB_OUTPUT"
 
 GITHUB_DOMAIN=${GITHUB_SERVER_URL#*//}
 CURRENT_BRANCH="$(git branch --show-current)"
