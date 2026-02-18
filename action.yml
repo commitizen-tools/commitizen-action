@@ -122,3 +122,6 @@ inputs:
   manual_version:
     description: "Manually specify the version to bump to"
     required: false
+  config:
+    description: "Manually specify the config file to use"
+    required: false
